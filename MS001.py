@@ -1,11 +1,7 @@
-from app import app
-from flask import Flask
+from app import app, db
+from app.models import User, Post
 
-app = Flask(__name__)
 
-@app.route('/')
-def hello_world():
-    return 'Hello Worlds!'
-
-if __name__ == '__main__':
-    app.run()
+@app.shell_context_processor
+def make_shell_context():
+    return {'db': db, 'User': User, 'Post': Post}
